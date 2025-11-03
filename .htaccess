@@ -1,0 +1,29 @@
+Options -Indexes
+AddDefaultCharset UTF-8
+
+<IfModule mod_headers.c>
+  <FilesMatch "\.(js|css|png|jpg|jpeg|gif|svg|webp|woff|woff2|ttf)$">
+    Header set Cache-Control "max-age=604800, public"
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 1 week"
+  ExpiresByType application/javascript "access plus 1 week"
+  ExpiresByType image/png "access plus 1 week"
+  ExpiresByType image/jpeg "access plus 1 week"
+  ExpiresByType image/svg+xml "access plus 1 week"
+  ExpiresByType font/woff2 "access plus 1 month"
+</IfModule>
+
+<Directory "${APACHE_DOCUMENT_ROOT}/data">
+  Options -Indexes
+  Order allow,deny
+  Deny from all
+</Directory>
+
+<Files "data/testimonial.json">
+  Order allow,deny
+  Deny from all
+</Files>
